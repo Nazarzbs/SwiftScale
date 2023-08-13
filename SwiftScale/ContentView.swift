@@ -48,7 +48,7 @@ struct ContentView: View {
 }
 //MARK: - #1 FirstView Temperature
 struct FirstView: View {
-    
+    @FocusState private var amountIsFocused: Bool
     @State private var inputTemperature = 0.0
     
     let temperatureUnits = ["celsius", "fahrenheit", "kelvin"]
@@ -93,6 +93,7 @@ struct FirstView: View {
                 Section(header: Text("Please enter your value")) {
                     TextField("Enter Temperature", value: $inputTemperature, format: .number)
                         .keyboardType(.decimalPad)
+                        .focused($amountIsFocused)
                 }
                 
                 Section(header: Text("Choose an input unit")) {
@@ -120,6 +121,15 @@ struct FirstView: View {
                 }
             }
             .navigationTitle("Temperature Converter")
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    
+                    Button("Done") {
+                        amountIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
@@ -127,6 +137,7 @@ struct FirstView: View {
 
 //MARK: - #2 SecondView Length
 struct SecondView: View {
+    @FocusState private var amountIsFocused: Bool
     @State private var inputLength  = 0.0
     private let lengthUnits = ["meters", "kilometers", "feet", "yards",  "miles"]
     
@@ -162,6 +173,7 @@ struct SecondView: View {
                 Section(header: Text("Please enter your value")) {
                     TextField("Enter Temperature", value: $inputLength , format: .number)
                         .keyboardType(.decimalPad)
+                        .focused($amountIsFocused)
                 }
                 
                 Section {
@@ -181,13 +193,22 @@ struct SecondView: View {
                 }
             }
             .navigationTitle("Length converter")
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+
+                    Button("Done") {
+                        amountIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
 
 //MARK: - #3 ThirdView Time
 struct ThirdView: View {
-   
+        @FocusState private var amountIsFocused: Bool
         @State private var inputTime = 0.0
         
         let timeUnits = ["seconds", "minutes", "hours", "days"]
@@ -244,6 +265,7 @@ struct ThirdView: View {
                     Section(header: Text("Please enter your value")) {
                         TextField("Enter Time", value: $inputTime, format: .number)
                             .keyboardType(.decimalPad)
+                            .focused($amountIsFocused)
                     }
                     
                     Section(header: Text("Choose an input unit")) {
@@ -271,6 +293,15 @@ struct ThirdView: View {
                     }
                 }
                 .navigationTitle("Time Converter")
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+
+                        Button("Done") {
+                            amountIsFocused = false
+                        }
+                    }
+                }
             }
         }
     }
@@ -279,7 +310,7 @@ struct ThirdView: View {
 struct FourthView: View {
     @State private var inputVolume  = 0.0
     private let volumeUnits = ["milliliters", "liters", "cups", "pints", "gallons"]
-    
+    @FocusState private var amountIsFocused: Bool
     private let volume = [UnitVolume.milliliters, UnitVolume.liters, UnitVolume.cups, UnitVolume.pints,  UnitVolume.gallons]
     
     @State private var convertFrom: Int = 0
@@ -312,6 +343,7 @@ struct FourthView: View {
                 Section(header: Text("Please enter your value")) {
                     TextField("Enter volume", value: $inputVolume , format: .number)
                         .keyboardType(.decimalPad)
+                        .focused($amountIsFocused)
                 }
                 
                 Section {
@@ -331,6 +363,15 @@ struct FourthView: View {
                 }
             }
             .navigationTitle("Volume converter")
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+
+                    Button("Done") {
+                        amountIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
